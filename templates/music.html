@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Music — {{ artist_name }}{% endblock %}
+{% block body %}
+<div class="library-page">
+  <nav class="site-nav library-nav"><a class="brand" href="/">CR<span>75</span>HITS</a><div class="navlinks"><a href="/">Home</a><a href="/#story">Story</a><a href="/#videos">Videos</a><a href="/#gallery">Gallery</a></div><div class="nav-actions"><a class="member-nav-btn" href="/member">Member Lounge</a><a class="creator" href="/login">Creator Studio ↗</a></div></nav>
+  <header class="library-hero">
+    <div class="eyebrow">THE OFFICIAL MUSIC LIBRARY</div>
+    <h1>Every release.<br><em>One place.</em></h1>
+    <p>Explore the CR 75 HITS catalogue — songs, visual releases and stories from Rajesh Bhardwaj.</p>
+    <div class="library-meta"><span><b>{{ songs|length }}</b> releases</span><span>Original catalogue</span><span>CR75HITS</span></div>
+  </header>
+  <main class="library-content">
+    <div class="library-toolbar"><div><div class="eyebrow">CATALOGUE</div><h2>All <em>Music</em></h2></div><a class="line-link" href="/">← Back to home</a></div>
+    <div class="library-grid">
+      {% for s in songs %}
+      <article class="library-card {% if s.featured %}is-featured{% endif %}">
+        <div class="library-art"><img src="{{ s.cover_url or url_for('static', filename='uploads/poster_dincharya.jpg') }}" alt="{{ s.title }} poster" loading="lazy"><div class="library-art-top"><span>{{ 'FEATURED' if s.featured else 'CR75HITS' }}</span><b>{{ "%02d"|format(loop.index) }}</b></div></div>
+        <div class="library-card-body"><div><small>{{ s.release_date or 'OFFICIAL RELEASE' }}</small><h3>{{ s.title }}</h3><p>{{ s.subtitle }}</p></div><div class="library-actions">
+          {% if s.youtube_url %}<a class="btn-small gold-small" href="{{ s.youtube_url }}" target="_blank" rel="noopener">▶ Watch</a>{% else %}<a class="btn-small gold-small" href="{{ youtube_url }}" target="_blank" rel="noopener">▶ Official channel</a>{% endif %}
+          {% if s.streaming_url %}<a class="btn-small" href="{{ s.streaming_url }}" target="_blank" rel="noopener">◉ Listen</a>{% endif %}
+          {% if not s.youtube_url and not s.streaming_url %}<span class="coming-soon">Links coming soon</span>{% endif %}
+        </div></div>
+      </article>
+      {% endfor %}
+    </div>
+    {% if not songs %}<div class="empty">No releases have been added yet.</div>{% endif %}
+  </main>
+  <footer><span>© 2026 CR 75 HITS · RAJESH BHARDWAJ</span><span><a href="/member">Member Lounge</a> · <a href="/login">Creator Studio</a></span></footer>
+</div>
+{% endblock %}

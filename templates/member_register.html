@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Become a Member — CR75HITS{% endblock %}{% block body %}
+<div class="auth-shell member-auth interactive-auth" data-auth>
+  <div class="auth-grid"></div><div class="auth-orb orb-one"></div><div class="auth-orb orb-two"></div><div class="auth-orb orb-three"></div>
+  <div class="auth-card register-card">
+    <div class="auth-topline"><span class="auth-dot"></span><span>JOIN THE CR75HITS COMMUNITY</span></div>
+    <a class="auth-brand" href="/"><span>CR75</span>HITS</a>
+    <div class="auth-icon member-icon">♬</div>
+    <div class="auth-kicker">JOIN THE COMMUNITY</div>
+    <h1>Become a <em>member.</em></h1>
+    <p>Create your member account. Mobile number and email are required for your membership profile.</p>
+    {% with msgs=get_flashed_messages() %}{% for m in msgs %}<div class="error">{{m}}</div>{% endfor %}{% endwith %}
+    <form method="post" class="auth-form"><label>Full name<input name="full_name" autocomplete="name" placeholder="Your full name" required></label><label>Email address<input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label><label>Mobile number<input name="mobile" inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="10-digit mobile number" required></label><label>Create password<input name="password" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required></label><label>Confirm password<input name="confirm_password" type="password" autocomplete="new-password" placeholder="Repeat password" required></label><button class="auth-submit member-submit">Create My Membership <span>↗</span></button></form>
+    <div class="member-mini"><strong>Annual membership · ₹199</strong><span>Annual membership prototype price. Online payment can be connected before launch.</span></div>
+    <div class="auth-benefits"><span>✓ Member profile</span><span>✓ New releases</span><span>✓ Creator updates</span></div>
+    <div class="auth-foot"><a href="/member/login">Already a member? Sign in →</a><a href="/">← Website</a></div>
+  </div>
+</div>
+<script src="{{ url_for('static',filename='auth.js') }}"></script>
+{% endblock %}

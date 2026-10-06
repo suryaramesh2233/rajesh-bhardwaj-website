@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Member Login — CR75HITS{% endblock %}{% block body %}
+<div class="auth-shell member-auth interactive-auth" data-auth>
+  <div class="auth-grid"></div><div class="auth-orb orb-one"></div><div class="auth-orb orb-two"></div><div class="auth-orb orb-three"></div>
+  <div class="auth-card">
+    <div class="auth-topline"><span class="auth-dot"></span><span>SECURE MEMBER ACCESS</span></div>
+    <a class="auth-brand" href="/"><span>CR75</span>HITS</a>
+    <div class="auth-icon member-icon">♬</div>
+    <div class="auth-kicker">MEMBER LOUNGE</div>
+    <h1>Welcome <em>back.</em></h1>
+    <p>Sign in to your CR75HITS member space and stay close to new music, stories and creator updates.</p>
+    {% with msgs=get_flashed_messages() %}{% for m in msgs %}<div class="error">{{m}}</div>{% endfor %}{% endwith %}
+    <form method="post" class="auth-form"><label>Email address<input name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label><label>Password<input name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></label><button class="auth-submit member-submit">Enter Member Lounge <span>↗</span></button></form>
+    <div class="member-mini"><strong>Annual membership · ₹199</strong><span>Exclusive releases, updates and future member-only experiences.</span></div>
+    <div class="auth-benefits"><span>✓ Secure account</span><span>✓ Creator updates</span><span>✓ Member access</span></div>
+    <div class="auth-foot"><a href="/member/register">New here? Become a member →</a><a href="/">← Website</a></div>
+  </div>
+</div>
+<script src="{{ url_for('static',filename='auth.js') }}"></script>
+{% endblock %}

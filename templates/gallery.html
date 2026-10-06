@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Gallery — {{ artist_name }}{% endblock %}
+{% block body %}
+<div class="editorial-page">
+<nav class="site-nav editorial-nav"><a class="brand" href="/">CR<span>75</span>HITS</a><div class="navlinks"><a href="/music">Music</a><a href="/videos">Videos</a><a href="/story">Story</a><a href="/gallery">Gallery</a><a href="/contact">Contact</a></div><div class="nav-actions"><a class="member-nav-btn" href="/member">Member Lounge</a><a class="creator" href="/login">Creator Studio ↗</a></div></nav>
+<header class="gallery-hero"><div class="eyebrow">THE VISUAL ARCHIVE</div><h1>Frames of the <em>journey.</em></h1><p>Song posters, portraits, events and visual moments from the CR75HITS world.</p></header>
+<main class="gallery-content"><div class="gallery-filters"><button class="gallery-filter active" data-filter="all">All</button>{% for c in categories %}<button class="gallery-filter" data-filter="{{ c }}">{{ c }}</button>{% endfor %}</div><div class="full-gallery-grid">{% for p in gallery %}<figure class="full-gallery-card" data-category="{{ p.category }}"><img src="{{ p.image_url }}" alt="{{ p.title or 'CR75HITS gallery image' }}" loading="lazy"><figcaption><span>{{ p.category }}</span><strong>{{ p.title or 'CR75HITS' }}</strong></figcaption></figure>{% endfor %}</div>{% if not gallery %}<div class="empty">The visual archive will appear here through Creator Studio.</div>{% endif %}</main>
+<footer><span>© 2026 CR 75 HITS · RAJESH BHARDWAJ</span><span>Back to <a href="/">official home</a></span></footer>
+</div>
+<script>
+document.querySelectorAll('.gallery-filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.gallery-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;document.querySelectorAll('.full-gallery-card').forEach(card=>{card.style.display=(f==='all'||card.dataset.category===f)?'block':'none'})}));
+</script>
+{% endblock %}

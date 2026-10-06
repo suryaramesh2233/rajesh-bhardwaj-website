@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Creator Studio Login — CR75HITS{% endblock %}{% block body %}
+<div class="auth-shell admin-auth interactive-auth" data-auth>
+  <div class="auth-grid"></div><div class="auth-orb orb-one"></div><div class="auth-orb orb-two"></div><div class="auth-orb orb-three"></div>
+  <div class="auth-card">
+    <div class="auth-topline"><span class="auth-dot admin-dot"></span><span>PRIVATE CREATOR ACCESS</span></div>
+    <a class="auth-brand" href="/"><span>CR75</span>HITS</a>
+    <div class="auth-icon admin-icon">✦</div>
+    <div class="auth-kicker">CREATOR STUDIO</div>
+    <h1>Welcome <em>back.</em></h1>
+    <p>Manage music, videos, gallery, members and the official creator experience from one secure place.</p>
+    {% with msgs=get_flashed_messages() %}{% for m in msgs %}<div class="error">{{m}}</div>{% endfor %}{% endwith %}
+    <form method="post" class="auth-form"><label>Studio username<input name="username" autocomplete="username" placeholder="Your studio username" required></label><label>Password<input name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></label><button class="auth-submit">Enter Creator Studio <span>↗</span></button></form>
+    <div class="admin-secure-note"><span>🔒</span><div><strong>Private administrator area</strong><small>Only authorised creator accounts should use this login.</small></div></div>
+    <div class="auth-benefits"><span>✓ Content control</span><span>✓ Member management</span><span>✓ Secure access</span></div>
+    <div class="auth-foot"><a href="/">← Official website</a><span>Admin access only</span></div>
+  </div>
+</div>
+<script src="{{ url_for('static',filename='auth.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Videos — {{ artist_name }}{% endblock %}
+{% block body %}
+<div class="library-page video-hub">
+  <nav class="site-nav library-nav"><a class="brand" href="/">CR<span>75</span>HITS</a><div class="navlinks"><a href="/">Home</a><a href="/music">Music</a><a href="/#story">Story</a><a href="/#gallery">Gallery</a></div><div class="nav-actions"><a class="member-nav-btn" href="/member">Member Lounge</a><a class="creator" href="/login">Creator Studio ↗</a></div></nav>
+  <header class="library-hero video-hero">
+    <div class="eyebrow">CR75HITS · OFFICIAL CHANNEL</div>
+    <h1>Watch the<br><em>journey.</em></h1>
+    <p>Music videos, rap releases, pahadi stories, teasers and visual experiments from the official CR75HITS YouTube channel.</p>
+    <div class="library-meta"><span><b>{{ videos|length }}</b> channel videos</span><span>Latest catalogue</span><span>Rajesh Bhardwaj</span></div>
+    <a class="btn gold" href="{{ youtube_url }}" target="_blank" rel="noopener">Open Official YouTube ↗</a>
+  </header>
+  <main class="library-content">
+    <div class="library-toolbar"><div><div class="eyebrow">VIDEO ARCHIVE</div><h2>From the <em>Channel</em></h2></div><a class="line-link" href="/">← Back to home</a></div>
+    <div class="video-hub-grid">
+      {% for v in videos %}
+      <article class="hub-video-card">
+        <a class="hub-thumb" href="{{ v.youtube_url }}" target="_blank" rel="noopener">
+          {% set thumb=v.thumbnail_url or (v.youtube_url|yt_thumb) %}
+          {% if thumb %}<img src="{{ thumb }}" alt="{{ v.title }} thumbnail" loading="lazy">{% endif %}
+          <span class="play-orb">▶</span><small>{{ v.category }}</small>
+        </a>
+        <div class="hub-video-info"><div><small>CR75HITS · OFFICIAL</small><h3>{{ v.title }}</h3></div><a class="btn-small gold-small" href="{{ v.youtube_url }}" target="_blank" rel="noopener">Open channel ↗</a></div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="video-note"><strong>Exact video links next.</strong><span>The catalogue above is seeded from the official-channel screenshot you provided. Once individual YouTube links are copied into Creator Studio, each card will open the exact video instead of the channel.</span></div>
+  </main>
+</div>
+{% endblock %}
